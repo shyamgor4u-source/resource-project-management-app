@@ -1,0 +1,411 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 25,
+  "summary": "Web application for Resource Management, Timesheet & Project Tracking. Includes managing resources/team members, logging timesheets, and tracking project progress.",
+  "architectural_notes": [
+    "Single-page web application with multiple modules: Resource Management, Timesheet, and Project Tracking",
+    "Role-based access control: Admin, PM, Delivery Head, Management, Employee roles with different permissions",
+    "Resources schema extended with fields: Employee ID, Name, Email, Contact, Location, Client, Project, Project ID, Project Manager, Reporting Manager, Delivery Head, Billability Status, Non-Billable Status, Total Experience, DOJ, Assignment Start/End Date, Practice, Primary Skills, Secondary Skills",
+    "Demo accounts with hardcoded credentials for each role (Employee, Manager, Delivery Head, PMO) to demonstrate role-based access to management",
+    "App is hosted on Internet Computer (ICP); slow initial loads (3–10s) and navigation delays are expected due to cold starts and decentralized network latency"
+  ],
+  "known_issues": [
+    "Logo (RL logo) not visible in the app UI",
+    "Employee details from uploaded Excel are not appearing in the app",
+    "Power BI report (AR-12) not yet visible/implemented in the Management dashboard view"
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-design-and-apply-a-cohesive-visual-theme-across-the-entire-app-use-a-dark-slate-charcoal-background-with-amber-orange-accent-colors-clean-sans-serif-typography-card-based-layouts-with-subtle-shadows-and-a-left-side-navigation-sidebar-the-style-should-feel-professional-and-modern-suited-to-an-enterprise-workforce-management-tool",
+      "title": "Design and apply a cohesive visual theme across the entire app: use a dark slate/charcoal background with amber/orange accent colors, clean sans-serif typography, card-based layouts with subtle shadows, and a left-side navigation sidebar. The style should feel professional and modern, suited to an enterprise workforce management tool.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-resource-management-page-in-the-frontend-where-users-can-view-all-team-members-in-a-filterable-searchable-table-card-grid-add-new-resources-via-a-modal-form-edit-existing-resource-details-and-deactivate-or-delete-resources",
+      "title": "Build a Resource Management page in the frontend where users can view all team members in a filterable, searchable table/card grid, add new resources via a modal form, edit existing resource details, and deactivate or delete resources.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-timesheet-page-in-the-frontend-where-users-can-log-work-hours-against-a-project-view-their-own-timesheet-entries-in-a-weekly-calendar-or-table-view-submit-timesheets-for-approval-and-managers-can-review-and-approve-submitted-timesheets-include-a-summary-showing-total-hours-logged-per-week",
+      "title": "Build a Timesheet page in the frontend where users can log work hours against a project, view their own timesheet entries in a weekly calendar or table view, submit timesheets for approval, and managers can review and approve submitted timesheets. Include a summary showing total hours logged per week.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-project-tracking-page-in-the-frontend-that-displays-all-projects-in-a-kanban-style-board-grouped-by-status-planning-active-on-hold-completed-allows-creating-and-editing-projects-via-a-modal-form-shows-project-detail-view-with-milestones-checklist-assigned-team-members-budget-and-dates-include-a-progress-bar-per-project-based-on-completed-milestones",
+      "title": "Build a Project Tracking page in the frontend that displays all projects in a kanban-style board grouped by status (Planning, Active, On Hold, Completed), allows creating and editing projects via a modal form, shows project detail view with milestones checklist, assigned team members, budget, and dates. Include a progress bar per project based on completed milestones.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-dashboard-home-page-that-provides-an-at-a-glance-overview-with-summary-cards-showing-total-active-resources-number-of-active-projects-total-hours-logged-this-week-and-number-of-pending-timesheet-approvals-include-a-recent-activity-feed-and-a-chart-showing-hours-logged-per-project-for-the-current-week",
+      "title": "Build a Dashboard home page that provides an at-a-glance overview with summary cards showing: total active resources, number of active projects, total hours logged this week, and number of pending timesheet approvals. Include a recent activity feed and a chart showing hours logged per project for the current week.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-a-dashboard-overview-illustration-and-an-app-logo-icon-for-use-as-static-assets",
+      "title": "Generate a dashboard overview illustration and an app logo icon for use as static assets.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-uploaded-logo-image-to-the-app-display-it-in-the-top-section-of-the-left-sidebar-above-the-navigation-links-and-in-the-top-header-bar-the-logo-should-replace-or-accompany-any-existing-app-name-text-serve-it-as-a-static-asset-from-frontend-public-assets-generated",
+      "title": "Add the user-uploaded logo image to the app. Display it in the top section of the left sidebar (above the navigation links) and in the top header bar. The logo should replace or accompany any existing app name text. Serve it as a static asset from frontend/public/assets/generated/.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-left-sidebar-left-panel-color-scheme-from-the-current-black-dark-background-with-amber-orange-accents-to-a-white-background-with-dark-blue-accents-and-text-this-includes-sidebar-background-color-navigation-link-colors-active-hover-states-icon-colors-logo-area-background-and-any-borders-or-dividers-within-the-sidebar-ensure-text-remains-legible-with-appropriate-contrast-against-the-white-background-dark-blue-e-g-navy-indigo-range-should-be-used-for-active-nav-items-hover-highlights-and-accent-elements-within-the-sidebar",
+      "title": "Update the left sidebar (left panel) color scheme from the current black/dark background with amber/orange accents to a white background with dark blue accents and text. This includes: sidebar background color, navigation link colors, active/hover states, icon colors, logo area background, and any borders or dividers within the sidebar. Ensure text remains legible with appropriate contrast against the white background. Dark blue (e.g., navy/indigo range) should be used for active nav items, hover highlights, and accent elements within the sidebar.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-rl-logo-visibility-issue-in-the-app-the-logo-image-served-from-frontend-public-assets-generated-must-render-correctly-in-both-the-top-section-of-the-left-sidebar-above-navigation-links-and-in-the-top-header-bar-verify-the-image-path-file-existence-and-that-the-img-src-attribute-resolves-correctly-in-the-deployed-app-ensure-the-logo-is-visible-on-the-white-sidebar-background-with-appropriate-sizing-e-g-max-height-40-48px",
+      "title": "Fix the RL logo visibility issue in the app. The logo image served from frontend/public/assets/generated/ must render correctly in both the top section of the left sidebar (above navigation links) and in the top header bar. Verify the image path, file existence, and that the <img> src attribute resolves correctly in the deployed app. Ensure the logo is visible on the white sidebar background with appropriate sizing (e.g., max-height 40–48px).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-csv-excel-file-import-feature-for-bulk-employee-resource-data-upload-on-the-resources-page-add-an-import-csv-excel-button-that-opens-a-file-picker-accepting-csv-and-xlsx-files-parse-the-file-on-the-frontend-map-columns-name-role-department-email-status-skills-to-the-resource-schema-preview-the-parsed-rows-in-a-confirmation-modal-and-on-confirmation-bulk-insert-the-records-via-the-existing-addresource-backend-call-show-success-error-feedback-indicating-how-many-records-were-imported",
+      "title": "Add a CSV/Excel file import feature for bulk employee (resource) data upload. On the Resources page, add an 'Import CSV/Excel' button that opens a file picker accepting .csv and .xlsx files. Parse the file on the frontend, map columns (name, role, department, email, status, skills) to the resource schema, preview the parsed rows in a confirmation modal, and on confirmation bulk-insert the records via the existing addResource backend call. Show success/error feedback indicating how many records were imported.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-role-based-login-system-add-a-login-page-that-uses-internet-identity-for-authentication-after-login-prompt-the-user-to-select-or-assign-a-role-from-admin-full-access-pm-approve-timesheets-manage-billability-delivery-head-bench-reports-management-dashboard-view-only-employee-timesheet-entry-only-store-the-authenticated-user-s-role-in-app-state-gate-navigation-and-page-access-based-on-role-employees-see-only-the-timesheets-page-management-sees-only-the-dashboard-delivery-head-sees-resources-and-a-bench-view-pm-sees-projects-and-timesheets-approval-admin-sees-all-pages-redirect-unauthorized-access-attempts-to-an-access-denied-screen",
+      "title": "Implement a role-based login system. Add a login page that uses Internet Identity for authentication. After login, prompt the user to select or assign a role from: Admin (full access), PM (approve timesheets, manage billability), Delivery Head (bench reports), Management (dashboard view only), Employee (timesheet entry only). Store the authenticated user's role in app state. Gate navigation and page access based on role: Employees see only the Timesheets page; Management sees only the Dashboard; Delivery Head sees Resources and a bench view; PM sees Projects and Timesheets approval; Admin sees all pages. Redirect unauthorized access attempts to an 'Access Denied' screen.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-that-employee-records-imported-via-excel-csv-req-13-are-persisted-in-the-backend-and-are-immediately-visible-in-the-resources-page-grid-card-view-after-import-after-a-successful-bulk-import-invalidate-and-refetch-the-resources-query-so-the-newly-added-employees-appear-without-requiring-a-manual-page-refresh",
+      "title": "Ensure that employee records imported via Excel/CSV (REQ-13) are persisted in the backend and are immediately visible in the Resources page grid/card view after import. After a successful bulk import, invalidate and refetch the resources query so the newly added employees appear without requiring a manual page refresh.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-redesign-the-resources-page-data-table-grid-to-match-the-rmg-resource-management-grid-data-sheet-template-the-table-columns-must-include-all-fields-from-the-rmg-template-employee-id-name-role-designation-department-email-status-active-bench-on-leave-billability-status-project-allocation-skills-joining-date-and-manager-display-data-in-a-tabular-spreadsheet-style-layout-not-just-cards-that-mirrors-the-rmg-sheet-format-with-sortable-columns-inline-status-badges-and-a-search-filter-bar-retain-the-existing-card-view-as-a-secondary-toggle-option",
+      "title": "Redesign the Resources page data table/grid to match the RMG (Resource Management Grid) data sheet template. The table columns must include all fields from the RMG template: Employee ID, Name, Role/Designation, Department, Email, Status (Active/Bench/On Leave), Billability Status, Project Allocation (%), Skills, Joining Date, and Manager. Display data in a tabular spreadsheet-style layout (not just cards) that mirrors the RMG sheet format, with sortable columns, inline status badges, and a search/filter bar. Retain the existing card view as a secondary toggle option.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-csv-excel-import-feature-on-the-resources-page-so-the-expected-column-format-exactly-matches-the-rmg-data-sheet-template-the-import-template-must-include-columns-employee-id-name-role-designation-department-email-status-billability-status-project-allocation-skills-joining-date-manager-update-the-column-mapping-logic-in-resourceimportmodal-to-parse-these-columns-and-map-them-to-the-backend-resource-schema-display-a-downloadable-sample-template-file-in-the-import-modal-so-users-can-see-the-exact-expected-format-before-uploading",
+      "title": "Update the CSV/Excel import feature on the Resources page so the expected column format exactly matches the RMG data sheet template. The import template must include columns: Employee ID, Name, Role/Designation, Department, Email, Status, Billability Status, Project Allocation (%), Skills, Joining Date, Manager. Update the column mapping logic in ResourceImportModal to parse these columns and map them to the backend resource schema. Display a downloadable sample template file in the import modal so users can see the exact expected format before uploading.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-export-button-on-the-resources-page-that-exports-the-current-resource-list-respecting-any-active-filters-search-to-a-xlsx-or-csv-file-using-the-exact-same-rmg-data-sheet-column-format-as-the-import-template-employee-id-name-role-designation-department-email-status-billability-status-project-allocation-skills-joining-date-manager-the-exported-file-should-be-downloadable-directly-from-the-browser",
+      "title": "Add an Export button on the Resources page that exports the current resource list (respecting any active filters/search) to a .xlsx or .csv file using the exact same RMG data sheet column format as the import template (Employee ID, Name, Role/Designation, Department, Email, Status, Billability Status, Project Allocation (%), Skills, Joining Date, Manager). The exported file should be downloadable directly from the browser.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-power-bi-report-embed-section-to-the-management-dashboard-view-add-a-dedicated-reports-page-or-section-accessible-only-to-users-with-the-management-or-admin-role-embed-the-power-bi-report-as-an-iframe-include-a-placeholder-with-clear-instructions-e-g-enter-your-power-bi-embed-url-in-the-configuration-along-with-an-input-field-in-the-admin-settings-area-where-the-power-bi-embed-url-can-be-configured-and-persisted-until-a-url-is-configured-display-a-clear-empty-state-message-no-power-bi-report-configured-please-provide-an-embed-url",
+      "title": "Add a Power BI report embed section to the Management dashboard view. Add a dedicated 'Reports' page or section accessible only to users with the Management or Admin role. Embed the Power BI report as an iframe. Include a placeholder with clear instructions (e.g., 'Enter your Power BI embed URL in the configuration') along with an input field in the admin/settings area where the Power BI embed URL can be configured and persisted. Until a URL is configured, display a clear empty state message: 'No Power BI report configured. Please provide an embed URL.'",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-redesign-the-resourcetableview-component-and-the-resource-table-on-the-resources-page-to-include-all-columns-matching-the-uploaded-rmg-template-screenshot-employee-id-name-email-id-contact-number-location-client-project-project-id-pm-project-manager-rm-reporting-manager-delivery-head-assignment-start-date-assignment-end-date-billability-status-billability-status-detail-non-billable-category-active-status-columns-must-be-sortable-horizontally-scrollable-for-the-full-column-set-and-display-inline-status-badges-for-billability-status-and-active-status-the-column-order-must-match-the-template-image-provided",
+      "title": "Redesign the ResourceTableView component and the Resource table on the Resources page to include all columns matching the uploaded RMG template screenshot: Employee ID, Name, Email ID, Contact Number, Location, Client, Project, Project ID, PM (Project Manager), RM (Reporting Manager), Delivery Head, Assignment Start Date, Assignment End Date, Billability Status, Billability Status detail / Non-Billable Category, Active Status. Columns must be sortable, horizontally scrollable for the full column set, and display inline status badges for Billability Status and Active Status. The column order must match the template image provided.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-resourceformmodal-add-edit-resource-modal-to-include-all-new-fields-contact-number-location-client-project-project-id-project-manager-reporting-manager-delivery-head-billability-status-radio-or-select-billable-non-billable-non-billable-status-dropdown-only-shown-enabled-when-billability-status-is-non-billable-options-available-for-deployment-bi-bench-partial-bench-bench-blocked-maternity-solution-investment-delivery-support-project-buffer-total-experience-date-of-joining-doj-assignment-start-date-assignment-end-date-practice-primary-skills-must-use-a-searchable-multi-select-dropdown-with-pre-populated-technology-options-including-ui-ux-automation-testing-java-jenkins-azure-adobe-and-an-other-write-option-free-text-entry-at-the-end-secondary-skills-must-also-use-a-searchable-multi-select-dropdown-with-the-same-options",
+      "title": "Update the ResourceFormModal (Add/Edit resource modal) to include all new fields: Contact Number, Location, Client, Project, Project ID, Project Manager, Reporting Manager, Delivery Head, Billability Status (radio or select: Billable / Non-Billable), Non-Billable Status (dropdown, only shown/enabled when Billability Status is Non-Billable, options: Available for Deployment, BI Bench, Partial Bench, Bench Blocked, Maternity, Solution Investment, Delivery Support, Project Buffer), Total Experience, Date of Joining (DOJ), Assignment Start Date, Assignment End Date, Practice. Primary Skills must use a searchable multi-select dropdown with pre-populated technology options including: UI, UX, Automation Testing, Java, Jenkins, Azure, Adobe, and an 'Other (write option)' free-text entry at the end. Secondary Skills must also use a searchable multi-select dropdown with the same options.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-csv-excel-import-template-resourceimportmodal-and-the-export-utility-exportutils-ts-to-use-the-full-new-column-set-employee-id-name-email-id-contact-number-location-client-project-project-id-project-manager-reporting-manager-delivery-head-billability-status-non-billable-category-total-experience-doj-assignment-start-date-assignment-end-date-practice-primary-skills-semicolon-separated-secondary-skills-semicolon-separated-status-the-downloadable-sample-template-file-in-the-import-modal-must-reflect-all-these-columns-column-mapping-logic-must-parse-all-new-columns-and-map-them-to-the-updated-backend-resource-schema-export-must-produce-a-file-with-these-exact-column-headers-respecting-any-active-search-filter",
+      "title": "Update the CSV/Excel import template (ResourceImportModal) and the export utility (exportUtils.ts) to use the full new column set: Employee ID, Name, Email ID, Contact Number, Location, Client, Project, Project ID, Project Manager, Reporting Manager, Delivery Head, Billability Status, Non-Billable Category, Total Experience, DOJ, Assignment Start Date, Assignment End Date, Practice, Primary Skills (semicolon-separated), Secondary Skills (semicolon-separated), Status. The downloadable sample template file in the import modal must reflect all these columns. Column mapping logic must parse all new columns and map them to the updated backend resource schema. Export must produce a file with these exact column headers respecting any active search/filter.",
+      "reqIds": [
+        "REQ-23",
+        "REQ-24"
+      ],
+      "version": 2
+    },
+    {
+      "id": "feature-update-the-dashboard-page-s-welcome-to-teamtrack-banner-hero-section-background-to-use-a-rich-multi-color-dark-gradient-apply-a-visually-striking-dark-gradient-that-blends-multiple-dark-tones-e-g-deep-navy-dark-teal-dark-indigo-and-charcoal-slate-using-css-gradient-linear-or-radial-the-gradient-should-feel-vibrant-yet-dark-complementing-the-overall-dark-theme-of-the-app-ensure-the-welcome-to-teamtrack-text-and-any-subtitle-text-remain-fully-legible-with-sufficient-contrast-white-or-light-colored-text-against-the-multi-color-dark-background",
+      "title": "Update the Dashboard page's 'Welcome to Teamtrack' banner/hero section background to use a rich multi-color dark gradient. Apply a visually striking dark gradient that blends multiple dark tones (e.g., deep navy, dark teal, dark indigo, and charcoal/slate) using CSS gradient (linear or radial). The gradient should feel vibrant yet dark, complementing the overall dark theme of the app. Ensure the 'Welcome to Teamtrack' text and any subtitle text remain fully legible with sufficient contrast (white or light-colored text) against the multi-color dark background.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-dedicated-demo-login-screen-that-presents-hardcoded-demo-accounts-for-each-role-the-login-screen-must-display-role-cards-or-buttons-for-the-following-demo-personas-employee-emp-demo-com-demo-employee-manager-manager-demo-com-demo-manager-delivery-head-dh-demo-com-demo-delivery-head-and-pmo-pmo-demo-com-demo-pmo-when-a-demo-account-is-selected-or-its-credentials-are-entered-the-app-must-authenticate-the-user-into-that-role-without-requiring-internet-identity-show-each-role-s-name-a-brief-description-of-their-access-and-a-login-as-role-button-the-existing-internet-identity-login-option-must-remain-available-on-the-same-screen-as-an-alternative",
+      "title": "Add a dedicated demo login screen that presents hardcoded demo accounts for each role. The login screen must display role cards or buttons for the following demo personas: Employee (emp@demo.com / Demo Employee), Manager (manager@demo.com / Demo Manager), Delivery Head (dh@demo.com / Demo Delivery Head), and PMO (pmo@demo.com / Demo PMO). When a demo account is selected or its credentials are entered, the app must authenticate the user into that role without requiring Internet Identity. Show each role's name, a brief description of their access, and a 'Login as [Role]' button. The existing Internet Identity login option must remain available on the same screen as an alternative.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-role-based-access-control-in-the-app-so-that-the-employee-role-can-only-see-and-access-the-timesheets-page-for-logging-their-own-hours-only-no-approval-actions-the-manager-pm-role-must-see-the-timesheets-page-with-approval-capabilities-can-review-and-approve-submitted-timesheets-and-the-projects-page-the-delivery-head-role-must-see-the-resources-page-and-the-projects-page-the-pmo-role-must-have-full-access-to-the-projects-page-including-creating-editing-and-uploading-updating-projects-update-the-sidebar-navigation-and-route-guards-in-layout-tsx-and-app-tsx-to-enforce-these-access-rules-redirect-any-unauthorized-route-access-to-the-existing-access-denied-screen",
+      "title": "Update the role-based access control in the app so that the Employee role can only see and access the Timesheets page (for logging their own hours only — no approval actions). The Manager/PM role must see the Timesheets page with approval capabilities (can review and approve submitted timesheets) and the Projects page. The Delivery Head role must see the Resources page and the Projects page. The PMO role must have full access to the Projects page including creating, editing, and uploading/updating projects. Update the sidebar navigation and route guards in Layout.tsx and App.tsx to enforce these access rules. Redirect any unauthorized route access to the existing Access Denied screen.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-date-filter-controls-row-to-the-dashboard-page-dashboardpage-tsx-that-allows-users-to-filter-all-dashboard-summary-metrics-by-month-year-and-optionally-a-specific-date-the-filter-ui-should-include-a-month-selector-jan-dec-a-year-selector-current-year-2-years-range-and-a-specific-date-picker-optional-clears-to-show-full-month-place-the-filter-bar-prominently-below-the-welcome-banner-and-above-the-summary-cards-default-the-filter-to-the-current-month-and-current-year-on-page-load",
+      "title": "Add a date filter controls row to the Dashboard page (DashboardPage.tsx) that allows users to filter all dashboard summary metrics by Month, Year, and optionally a specific Date. The filter UI should include a Month selector (Jan–Dec), a Year selector (current year ± 2 years range), and a specific Date picker (optional, clears to show full month). Place the filter bar prominently below the welcome banner and above the summary cards. Default the filter to the current month and current year on page load.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-active-resources-summary-card-on-the-dashboard-to-display-the-count-of-resources-whose-status-is-active-and-whose-date-of-joining-doj-falls-within-the-selected-month-year-filter-period-if-the-optional-specific-date-filter-is-set-show-resources-active-on-that-date-the-card-label-must-indicate-the-selected-period-e-g-active-resources-jul-2025",
+      "title": "Update the 'Active Resources' summary card on the Dashboard to display the count of resources whose status is Active and whose Date of Joining (DOJ) falls within the selected month/year filter period. If the optional specific date filter is set, show resources active on that date. The card label must indicate the selected period (e.g., 'Active Resources (Jul 2025)').",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-remaining-dashboard-summary-cards-active-projects-total-hours-logged-and-pending-timesheet-approvals-to-also-respect-the-month-year-date-filter-active-projects-should-count-projects-whose-startdate-falls-within-the-selected-period-total-hours-logged-should-sum-hourslogged-for-timesheet-entries-whose-date-falls-within-the-selected-period-pending-timesheet-approvals-should-count-submitted-pending-timesheet-entries-within-the-selected-period-each-card-label-must-indicate-the-active-filter-period",
+      "title": "Update the remaining Dashboard summary cards — Active Projects, Total Hours Logged, and Pending Timesheet Approvals — to also respect the Month/Year/Date filter. Active Projects should count projects whose startDate falls within the selected period. Total Hours Logged should sum hoursLogged for timesheet entries whose date falls within the selected period. Pending Timesheet Approvals should count submitted (pending) timesheet entries within the selected period. Each card label must indicate the active filter period.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-hourschart-and-activityfeed-components-on-the-dashboard-page-to-also-respect-the-month-year-date-filter-the-hourschart-should-show-hours-logged-per-project-only-for-timesheet-entries-within-the-selected-period-the-activityfeed-should-show-recent-activity-events-resource-project-timesheet-that-occurred-within-the-selected-period",
+      "title": "Update the HoursChart and ActivityFeed components on the Dashboard page to also respect the Month/Year/Date filter. The HoursChart should show hours logged per project only for timesheet entries within the selected period. The ActivityFeed should show recent activity events (resource, project, timesheet) that occurred within the selected period.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-loading-spinner-and-skeleton-screen-components-across-all-major-pages-and-data-fetching-areas-to-improve-perceived-performance-on-the-dashboard-page-show-skeleton-placeholders-for-summary-cards-the-hourschart-and-the-activityfeed-while-data-is-loading-on-the-resources-page-show-a-skeleton-table-grid-while-resources-are-fetching-on-the-projects-page-show-skeleton-kanban-columns-while-projects-load-on-the-timesheets-page-show-a-skeleton-weekly-view-while-entries-load-all-skeleton-screens-must-match-the-layout-dimensions-of-the-real-content-they-replace-and-use-a-subtle-animated-shimmer-effect-consistent-with-the-app-s-dark-theme",
+      "title": "Add loading spinner and skeleton screen components across all major pages and data-fetching areas to improve perceived performance. On the Dashboard page, show skeleton placeholders for summary cards, the HoursChart, and the ActivityFeed while data is loading. On the Resources page, show a skeleton table/grid while resources are fetching. On the Projects page, show skeleton Kanban columns while projects load. On the Timesheets page, show a skeleton weekly view while entries load. All skeleton screens must match the layout dimensions of the real content they replace and use a subtle animated shimmer effect consistent with the app's dark theme.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Resource Management module to manage team members and their allocations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Timesheet module for logging and reviewing work hours",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Project Tracking module to monitor project progress, milestones, and status",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Implement a Resource Management backend model that stores team members with fields: id, name, role, department, email, status (active/inactive), and skill tags. Provide CRUD operations: addResource, getResources, updateResource, deleteResource.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Implement a Timesheet backend model that stores timesheet entries with fields: id, resourceId, projectId, date, hoursLogged, description, and status (draft/submitted/approved). Provide operations: addTimesheetEntry, getTimesheetEntries (filterable by resourceId, projectId, date range), updateTimesheetEntry, deleteTimesheetEntry, and submitTimesheet (changes status to submitted).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Implement a Project Tracking backend model that stores projects with fields: id, name, description, status (planning/active/on-hold/completed), startDate, endDate, budget, managerName, assignedResourceIds, milestones (each with id, title, dueDate, completed). Provide operations: addProject, getProjects, updateProject, deleteProject, addMilestone, toggleMilestone.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Role-based login system with roles: Admin (full access), PM (approve timesheets, change billability), Delivery Head (bench reports), Management (dashboard view), Employee (timesheet only)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "CSV/Excel file import feature for bulk employee data upload",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Embed Power BI report as iframe in the Management dashboard view",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Update font and color combination for the app (colors to be confirmed by user)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Add a custom logo provided by the user to the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Change left panel (sidebar) color combination from black & orange to white and dark blue",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Update Resources template/schema with new fields: Employee ID, Name, Email ID, Contact Number, Location, Client, Project, Project ID, Project Manager, Reporting Manager, Delivery Head, Billability Status (Billable/Non-Billable), Non-Billable Status (Available for Deployment, BI Bench, Partial Bench, Bench Blocked, Maternity, Solution Investment, Delivery support, Project buffer), Total Experience, DOJ, Assignment Start/End Date, Practice, Primary Skills (dropdown/search-select with tech options), Secondary Skills (dropdown/search-select). Import/export and table view should reflect these columns.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Extend the backend Resource data model to include all new fields: employeeId (text), name (text), email (text), contactNumber (text), location (text), client (text), project (text), projectId (text, optional), projectManager (text), reportingManager (text), deliveryHead (text), billabilityStatus (Billable / Non-Billable), nonBillableStatus (one of: Available for Deployment, BI Bench, Partial Bench, Bench Blocked, Maternity, Solution Investment, Delivery Support, Project Buffer — only applicable when billabilityStatus is Non-Billable), totalExperience (text, e.g. '5 years'), doj (date, Date of Joining), assignmentStartDate (date), assignmentEndDate (date), practice (text), primarySkills (array of text), secondarySkills (array of text), status (Active/Inactive). Update addResource, updateResource, and getResources backend calls to handle all new fields. Preserve existing CRUD operations.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Change the Dashboard page background behind the 'Welcome to Teamtrack' banner to a multi-color dark background",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Role-based demo login screen with hardcoded demo accounts: Employee (Timesheet only), Manager (approve timesheets), Delivery Head (projects view), PMO (upload/update projects). Show role-specific screens on login.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Dashboard filters: month, date, and year-wise filters for all summary metrics (e.g., Active Resources shows current month only by default)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add a PMO role to the backend user profile role type alongside the existing roles (Admin, PM, Delivery Head, Management, Employee). Update the backend's role validation and any role-gated operations (e.g., project creation, update) to also permit the PMO role to perform project upload and update actions. Ensure the PMO role is stored and retrievable from the user profile.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Populate demo/seed data in the app with realistic employee names, projects, and timesheet entries based on the uploaded RMG file to support real-world testing scenarios",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Seed the backend with at least 15 realistic demo employee/resource records drawn from typical RMG (Resource Management Grid) data. Each record must populate all extended resource fields: employeeId, name, email, contactNumber, location, client, project, projectId, projectManager, reportingManager, deliveryHead, billabilityStatus (mix of Billable and Non-Billable), nonBillableStatus (where applicable), totalExperience, doj, assignmentStartDate, assignmentEndDate, practice, primarySkills, secondarySkills, and status (mix of Active and Bench). Use realistic Indian IT industry names, roles (e.g., Java Developer, UI Engineer, QA Automation, Azure Architect, Delivery Manager), and departments. The seed data must be inserted via the existing addResource backend call, invoked once on canister initialization if no resources exist yet (guard with a firstRun or seeded flag in stable storage).",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Seed the backend with at least 6 realistic demo projects. Each project must include: name (realistic IT delivery project names, e.g. 'Azure Migration – FinServ', 'React Portal Redesign'), description, status (mix of Planning, Active, On Hold, Completed), startDate, endDate, budget, managerName (drawn from the demo employee set), assignedResourceIds (reference seeded employee IDs), and at least 3 milestones per project (with title, dueDate, and a mix of completed/incomplete). The seed data must be inserted via the existing addProject and addMilestone backend calls, guarded by the same firstRun/seeded flag used for resources.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Seed the backend with realistic demo timesheet entries spread across the current month and the previous month. Entries must reference seeded employee resourceIds and seeded project IDs. Include a mix of statuses: draft, submitted, and approved. Log between 4 and 8 hours per entry, across multiple days per employee, so that the Dashboard's 'Total Hours Logged' and 'Pending Timesheet Approvals' cards show meaningful non-zero values for the current month filter. Use the existing addTimesheetEntry backend call, guarded by the same firstRun/seeded flag.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Add loading spinners and skeleton screens to improve perceived performance during data fetches and navigation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Provide a complete downloadable code package configured for deployment on Vercel and GitHub",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-32",
+      "summary": "Configure the frontend project for deployment on Vercel and GitHub. Add a vercel.json configuration file at the repository root that sets the output directory to the frontend build output, configures all routes to rewrite to index.html (SPA fallback), and sets the build command and install command. Update the frontend Vite config to ensure the build output is self-contained with correct asset base paths (base: '/') so that all static assets, fonts, and generated images resolve correctly when deployed on Vercel. Add a README.md at the repository root with step-by-step instructions for: cloning the repository, installing dependencies, running the frontend locally, building for production, and deploying to Vercel via the Vercel CLI or GitHub integration. Ensure that any environment variables required (e.g., backend canister IDs) are documented in a .env.example file.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Resource & Project Management App",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

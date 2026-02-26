@@ -1,0 +1,38 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-loading-spinner-and-skeleton-screen-components-across-all-major-pages-and-data-fetching-areas-to-improve-perceived-performance-on-the-dashboard-page-show-skeleton-placeholders-for-summary-cards-the-hourschart-and-the-activityfeed-while-data-is-loading-on-the-resources-page-show-a-skeleton-table-grid-while-resources-are-fetching-on-the-projects-page-show-skeleton-kanban-columns-while-projects-load-on-the-timesheets-page-show-a-skeleton-weekly-view-while-entries-load-all-skeleton-screens-must-match-the-layout-dimensions-of-the-real-content-they-replace-and-use-a-subtle-animated-shimmer-effect-consistent-with-the-app-s-dark-theme",
+      "featureTitle": "Add loading spinner and skeleton screen components across all major pages and data-fetching areas to improve perceived performance. On the Dashboard page, show skeleton placeholders for summary cards, the HoursChart, and the ActivityFeed while data is loading. On the Resources page, show a skeleton table/grid while resources are fetching. On the Projects page, show skeleton Kanban columns while projects load. On the Timesheets page, show a skeleton weekly view while entries load. All skeleton screens must match the layout dimensions of the real content they replace and use a subtle animated shimmer effect consistent with the app's dark theme.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ActivityFeedSkeleton.tsx",
+        "frontend/src/components/HoursChartSkeleton.tsx",
+        "frontend/src/components/ProjectKanbanBoard.tsx",
+        "frontend/src/components/ProjectKanbanCardSkeleton.tsx",
+        "frontend/src/components/ResourceCardSkeleton.tsx",
+        "frontend/src/components/ResourceTableSkeleton.tsx",
+        "frontend/src/components/SummaryCardSkeleton.tsx",
+        "frontend/src/components/WeeklyTimesheetViewSkeleton.tsx",
+        "frontend/src/pages/DashboardPage.tsx",
+        "frontend/src/pages/ProjectsPage.tsx",
+        "frontend/src/pages/ResourcesPage.tsx",
+        "frontend/src/pages/TimesheetsPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

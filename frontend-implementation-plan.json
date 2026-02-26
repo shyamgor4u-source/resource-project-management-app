@@ -1,0 +1,148 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add loading skeletons and prepare Vercel/GitHub-ready code package",
+  "requirements": [
+    {
+      "id": "REQ-36",
+      "summary": "Add loading spinner and skeleton screen components across all major pages and data-fetching areas to improve perceived performance",
+      "acceptanceCriteria": [
+        "Dashboard summary cards display animated skeleton placeholders while data is being fetched, then smoothly transition to real data.",
+        "HoursChart and ActivityFeed on the Dashboard show skeleton placeholders during loading.",
+        "Resources page table and card grid show skeleton rows/cards while resources are loading.",
+        "Projects Kanban board shows skeleton cards in each column while projects are loading.",
+        "Timesheets page shows a skeleton weekly view while timesheet entries are loading.",
+        "All skeletons use an animated shimmer effect that fits the dark slate/charcoal app theme.",
+        "No layout shift occurs when real data replaces the skeleton.",
+        "A global loading spinner (e.g., centered spinner overlay or top progress bar) appears during page-level navigation transitions."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ui/Skeleton.tsx",
+          "operation": "create",
+          "description": "Create a reusable Skeleton component with an animated shimmer effect using dark-themed gradient (slate-700/slate-600) compatible with the app's OKLCH color system. The component should accept className for dimension/shape customization and include a shimmer animation keyframe in the component styles."
+        },
+        {
+          "path": "frontend/src/components/SummaryCardSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder component matching the layout of SummaryCard. Include skeletons for the icon circle, title text, large value text, and optional trend text, all using the Skeleton component with appropriate dimensions."
+        },
+        {
+          "path": "frontend/src/components/HoursChartSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder for HoursChart that displays a series of vertical bar-shaped skeletons with varying heights (4-6 bars) to simulate the bar chart appearance. Match the chart container dimensions and use the Skeleton component."
+        },
+        {
+          "path": "frontend/src/components/ActivityFeedSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder for ActivityFeed showing 4-5 activity entry skeletons, each with a small circular icon skeleton and two horizontal text line skeletons (description and timestamp). Use the Skeleton component and match the feed's layout structure."
+        },
+        {
+          "path": "frontend/src/components/ResourceTableSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder for ResourceTableView displaying a table header row (non-skeleton) followed by 5-8 skeleton rows. Each row should have skeleton cells matching the table's column structure (name, role, department, email, status, actions). Use the Skeleton component for cell content."
+        },
+        {
+          "path": "frontend/src/components/ResourceCardSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder matching the ResourceCard layout. Include skeletons for name, role, department, email, and skill tag pills. Use the Skeleton component and match the card's padding and spacing."
+        },
+        {
+          "path": "frontend/src/components/ProjectKanbanCardSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder for a single project Kanban card. Include skeletons for project name, progress bar, manager name, end date, and team size indicator. Use the Skeleton component and match the card's layout dimensions."
+        },
+        {
+          "path": "frontend/src/components/WeeklyTimesheetViewSkeleton.tsx",
+          "operation": "create",
+          "description": "Create a skeleton placeholder for WeeklyTimesheetView. Display skeleton week summary headers (7 day columns with hour totals), followed by 3-5 skeleton timesheet entry rows. Use the Skeleton component to match the weekly view's structure."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Integrate skeleton components into DashboardPage. While data queries (resources, projects, timesheets, activity) are loading, render SummaryCardSkeleton components instead of SummaryCard, HoursChartSkeleton instead of HoursChart, and ActivityFeedSkeleton instead of ActivityFeed. Use the isLoading state from useQueries hooks to conditionally render skeletons. Ensure smooth transition when real data replaces skeletons (no layout shift)."
+        },
+        {
+          "path": "frontend/src/pages/ResourcesPage.tsx",
+          "operation": "modify",
+          "description": "Integrate skeleton components into ResourcesPage. While useGetResources query is loading, render ResourceTableSkeleton in table view mode or a grid of ResourceCardSkeleton components in card view mode. Use the isLoading state to conditionally show skeletons before displaying actual resource data."
+        },
+        {
+          "path": "frontend/src/pages/ProjectsPage.tsx",
+          "operation": "modify",
+          "description": "Integrate skeleton components into ProjectsPage. While useGetProjects query is loading, render ProjectKanbanCardSkeleton components (2-3 per column) in each of the four Kanban columns (Planning, Active, On Hold, Completed). Use the isLoading state to conditionally show skeletons within ProjectKanbanBoard before displaying real projects."
+        },
+        {
+          "path": "frontend/src/pages/TimesheetsPage.tsx",
+          "operation": "modify",
+          "description": "Integrate WeeklyTimesheetViewSkeleton into TimesheetsPage. While useGetTimesheetEntries query is loading, render WeeklyTimesheetViewSkeleton instead of WeeklyTimesheetView. Use the isLoading state to conditionally display the skeleton before showing actual timesheet data."
+        },
+        {
+          "path": "frontend/src/components/ProjectKanbanBoard.tsx",
+          "operation": "modify",
+          "description": "Update ProjectKanbanBoard to accept an optional isLoading prop. When isLoading is true, render ProjectKanbanCardSkeleton components (2-3 per column) in each column instead of the empty state message. This allows the parent ProjectsPage to pass loading state and control skeleton rendering."
+        },
+        {
+          "path": "frontend/src/components/WeeklyTimesheetView.tsx",
+          "operation": "modify",
+          "description": "Ensure WeeklyTimesheetView gracefully handles loading states passed from parent. If needed, adjust prop types to support conditional rendering. The parent (TimesheetsPage) will control whether to show WeeklyTimesheetViewSkeleton or the actual WeeklyTimesheetView component."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add a global page-level loading indicator (centered spinner overlay or top progress bar) that appears during route transitions. Use TanStack Router's pending state or a route-level loading boundary to detect navigation in progress. Display a subtle spinner or linear progress bar at the top of the viewport while the next route is loading, ensuring it doesn't block the UI but provides visual feedback during page changes."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Add a shimmer animation keyframe to the Tailwind config if not already present. Define @keyframes shimmer with a translateX animation and register it in the theme.extend.animation object so skeleton components can reference 'animate-shimmer'. Ensure the animation duration (~2s) and easing fit the dark theme aesthetic."
+        }
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "summary": "Configure the frontend project for deployment on Vercel and GitHub with complete deployment documentation",
+      "acceptanceCriteria": [
+        "A vercel.json file exists at the repository root with correct build command, output directory, and SPA rewrite rules (all paths → /index.html).",
+        "The Vite config has base set so all asset paths resolve correctly on Vercel (no 404s for JS/CSS/images).",
+        "Running 'npm run build' in the frontend directory produces a deployable dist/ folder.",
+        "A README.md exists at the repository root with clear local setup and Vercel deployment instructions.",
+        "A .env.example file documents all required environment variables.",
+        "The logo and other static assets under frontend/public/assets/generated/ are included in the build output and served correctly on Vercel.",
+        "The deployed Vercel app loads the login page without errors on first visit and all client-side routes (dashboard, resources, projects, timesheets) navigate correctly without 404s."
+      ],
+      "file_operations": [
+        {
+          "path": "vercel.json",
+          "operation": "create",
+          "description": "Create a vercel.json configuration file at the repository root. Set the build command to 'cd frontend && npm install && npm run build', the output directory to 'frontend/dist', and include a rewrites array with a single rule mapping all paths ('/:path*') to '/index.html' to support SPA client-side routing. Optionally set the install command to skip root install if not needed."
+        },
+        {
+          "path": "frontend/vite.config.ts",
+          "operation": "modify",
+          "description": "Ensure the Vite config has 'base' set to '/' (or omit it, as '/' is the default) so that all static asset paths (JS, CSS, images, fonts) resolve correctly when deployed on Vercel. Verify that the build.outDir is 'dist' and that public assets from 'frontend/public' are copied into the dist folder during build. Confirm that no hardcoded absolute paths or incorrect base values exist that would cause 404s on Vercel."
+        },
+        {
+          "path": "README.md",
+          "operation": "create",
+          "description": "Create a comprehensive README.md at the repository root. Include sections for: project overview (TeamTrack - a resource and project management app), prerequisites (Node.js, npm), local setup instructions (clone repo, install dependencies, run dev server), building for production (npm run build), environment variables (reference .env.example), deploying to Vercel (via CLI or GitHub integration with step-by-step commands), and a note that the backend runs on the Internet Computer (not deployed to Vercel). Provide clear commands and expected outcomes for each step."
+        },
+        {
+          "path": ".env.example",
+          "operation": "create",
+          "description": "Create a .env.example file at the repository root documenting all required environment variables for the frontend. Include placeholders for backend canister IDs (e.g., VITE_BACKEND_CANISTER_ID=your_canister_id_here) and any other build-time or runtime configuration variables. Add comments explaining each variable's purpose and how to obtain the values (e.g., from dfx canister id output)."
+        },
+        {
+          "path": "frontend/public/assets/generated/teamtrack-logo.dim_128x128.png",
+          "operation": "modify",
+          "description": "Verify that the generated TeamTrack logo at frontend/public/assets/generated/teamtrack-logo.dim_128x128.png is included in the build output when running 'npm run build'. Ensure the Vite config copies all files from frontend/public to dist/ so the logo and other static assets (dashboard-hero.dim_800x400.png, RL Logo.svg) are accessible at runtime on Vercel. No code changes needed if the logo file already exists; this is a verification step."
+        },
+        {
+          "path": "frontend/package.json",
+          "operation": "modify",
+          "description": "Review and ensure that the 'build' script in package.json runs 'vite build' and that there are no missing dependencies or build-time errors. Confirm that all production dependencies are listed (not just devDependencies) so Vercel can install them. If any build or deploy scripts need adjustment (e.g., adding a 'vercel-build' script as an alias), add them here. Ensure the package.json is valid and ready for CI/CD environments."
+        }
+      ]
+    }
+  ]
+}

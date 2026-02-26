@@ -1,0 +1,70 @@
+{
+  "kind": "build_request",
+  "title": "Add loading skeletons and prepare Vercel/GitHub-ready code package",
+  "projectName": "TeamTrack",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-36",
+      "text": "Add loading spinner and skeleton screen components across all major pages and data-fetching areas to improve perceived performance. On the Dashboard page, show skeleton placeholders for summary cards, the HoursChart, and the ActivityFeed while data is loading. On the Resources page, show a skeleton table/grid while resources are fetching. On the Projects page, show skeleton Kanban columns while projects load. On the Timesheets page, show a skeleton weekly view while entries load. All skeleton screens must match the layout dimensions of the real content they replace and use a subtle animated shimmer effect consistent with the app's dark theme.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "yes, and can you give me complete code download file which i can upload on Vercel.com & github",
+          "add loading spinners and skeleton screens to improve perceived performance during data fetches and navigation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Dashboard summary cards display animated skeleton placeholders while data is being fetched, then smoothly transition to real data.",
+        "HoursChart and ActivityFeed on the Dashboard show skeleton placeholders during loading.",
+        "Resources page table and card grid show skeleton rows/cards while resources are loading.",
+        "Projects Kanban board shows skeleton cards in each column while projects are loading.",
+        "Timesheets page shows a skeleton weekly view while timesheet entries are loading.",
+        "All skeletons use an animated shimmer effect that fits the dark slate/charcoal app theme.",
+        "No layout shift occurs when real data replaces the skeleton.",
+        "A global loading spinner (e.g., centered spinner overlay or top progress bar) appears during page-level navigation transitions."
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Configure the frontend project for deployment on Vercel and GitHub. Add a vercel.json configuration file at the repository root that sets the output directory to the frontend build output, configures all routes to rewrite to index.html (SPA fallback), and sets the build command and install command. Update the frontend Vite config to ensure the build output is self-contained with correct asset base paths (base: '/') so that all static assets, fonts, and generated images resolve correctly when deployed on Vercel. Add a README.md at the repository root with step-by-step instructions for: cloning the repository, installing dependencies, running the frontend locally, building for production, and deploying to Vercel via the Vercel CLI or GitHub integration. Ensure that any environment variables required (e.g., backend canister IDs) are documented in a .env.example file.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "can you give me complete code download file which i can upload on Vercel.com & github"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A vercel.json file exists at the repository root with correct build command, output directory, and SPA rewrite rules (all paths → /index.html).",
+        "The Vite config has base set so all asset paths resolve correctly on Vercel (no 404s for JS/CSS/images).",
+        "Running 'npm run build' in the frontend directory produces a deployable dist/ folder.",
+        "A README.md exists at the repository root with clear local setup and Vercel deployment instructions.",
+        "A .env.example file documents all required environment variables.",
+        "The logo and other static assets under frontend/public/assets/generated/ are included in the build output and served correctly on Vercel.",
+        "The deployed Vercel app loads the login page without errors on first visit and all client-side routes (dashboard, resources, projects, timesheets) navigate correctly without 404s."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "The Vercel deployment configuration must only target the frontend (React/Vite) — the Motoko backend continues to run on the Internet Computer and is not deployed to Vercel.",
+    "Skeleton screens must not break or replace any existing functionality; they are additive loading states only."
+  ],
+  "nonGoals": [
+    "Deploying or migrating the Motoko backend to Vercel, AWS, or any centralized cloud provider.",
+    "Changing the Internet Computer canister architecture or backend code for Vercel compatibility.",
+    "Implementing server-side rendering (SSR) or Next.js migration.",
+    "Adding new product features beyond loading skeletons and deployment configuration.",
+    "Modifying Internet Identity authentication flow."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

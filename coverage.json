@@ -1,0 +1,94 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T13:18:13.080Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-36",
+        "summary": "Add loading spinner and skeleton screen components across all major pages and data-fetching areas to improve perceived performance. On the Dashboard page, show skeleton placeholders for summary cards, the HoursChart, and the ActivityFeed while data is loading. On the Resources page, show a skeleton table/grid while resources are fetching. On the Projects page, show skeleton Kanban columns while projects load. On the Timesheets page, show a skeleton weekly view while entries load. All skeleton screens must match the layout dimensions of the real content they replace and use a subtle animated shimmer effect consistent with the app's dark theme.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ui/Skeleton.tsx",
+          "frontend/src/components/SummaryCardSkeleton.tsx",
+          "frontend/src/components/HoursChartSkeleton.tsx",
+          "frontend/src/components/ActivityFeedSkeleton.tsx",
+          "frontend/src/components/ResourceTableSkeleton.tsx",
+          "frontend/src/components/ResourceCardSkeleton.tsx",
+          "frontend/src/components/ProjectKanbanCardSkeleton.tsx",
+          "frontend/src/components/WeeklyTimesheetViewSkeleton.tsx",
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/ResourcesPage.tsx",
+          "frontend/src/pages/ProjectsPage.tsx",
+          "frontend/src/pages/TimesheetsPage.tsx",
+          "frontend/src/components/ProjectKanbanBoard.tsx",
+          "frontend/src/components/WeeklyTimesheetView.tsx",
+          "frontend/src/App.tsx",
+          "frontend/tailwind.config.js"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/SummaryCardSkeleton.tsx",
+          "frontend/src/components/HoursChartSkeleton.tsx",
+          "frontend/src/components/ActivityFeedSkeleton.tsx",
+          "frontend/src/components/ResourceTableSkeleton.tsx",
+          "frontend/src/components/ResourceCardSkeleton.tsx",
+          "frontend/src/components/ProjectKanbanCardSkeleton.tsx",
+          "frontend/src/components/WeeklyTimesheetViewSkeleton.tsx",
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/ResourcesPage.tsx",
+          "frontend/src/pages/ProjectsPage.tsx",
+          "frontend/src/pages/TimesheetsPage.tsx",
+          "frontend/src/components/ProjectKanbanBoard.tsx",
+          "frontend/src/App.tsx",
+          "frontend/tailwind.config.js"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Configure the frontend project for deployment on Vercel and GitHub. Add a vercel.json configuration file at the repository root that sets the output directory to the frontend build output, configures all routes to rewrite to index.html (SPA fallback), and sets the build command and install command. Update the frontend Vite config to ensure the build output is self-contained with correct asset base paths (base: '/') so that all static assets, fonts, and generated images resolve correctly when deployed on Vercel. Add a README.md at the repository root with step-by-step instructions for: cloning the repository, installing dependencies, running the frontend locally, building for production, and deploying to Vercel via the Vercel CLI or GitHub integration. Ensure that any environment variables required (e.g., backend canister IDs) are documented in a .env.example file.",
+        "status": "missing",
+        "plannedFiles": [
+          "vercel.json",
+          "frontend/vite.config.ts",
+          "README.md",
+          ".env.example",
+          "frontend/public/assets/generated/teamtrack-logo.dim_128x128.png",
+          "frontend/package.json"
+        ],
+        "matchedFiles": []
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/ActivityFeedSkeleton.tsx",
+    "frontend/src/components/HoursChartSkeleton.tsx",
+    "frontend/src/components/LoginPage.tsx",
+    "frontend/src/components/ProjectKanbanBoard.tsx",
+    "frontend/src/components/ProjectKanbanCardSkeleton.tsx",
+    "frontend/src/components/ResourceCardSkeleton.tsx",
+    "frontend/src/components/ResourceTableSkeleton.tsx",
+    "frontend/src/components/SummaryCardSkeleton.tsx",
+    "frontend/src/components/WeeklyTimesheetViewSkeleton.tsx",
+    "frontend/src/pages/DashboardPage.tsx",
+    "frontend/src/pages/ProjectsPage.tsx",
+    "frontend/src/pages/ReportsPage.tsx",
+    "frontend/src/pages/ResourcesPage.tsx",
+    "frontend/src/pages/TimesheetsPage.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
